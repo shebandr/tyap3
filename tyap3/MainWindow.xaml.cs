@@ -132,12 +132,13 @@ namespace tyap3
             StartStage = Rules[0][0];
             CurrentStage = StartStage;
             FinalStage = Rules[Rules.Count - 1][3];
+            Stack = "Z";
             string changes = "";
+            changes += " (" + CurrentStage + " " + Chain + " " + Stack + ") " + "\n";
 
-            foreach(char i in Chain)
+            foreach (char i in Chain)
             {
                 bool flag = true;
-                changes += " (" + CurrentStage + " " + Chain + " " + Stack + ") " + "\n";
 
                 //начинаются пляски с проверками...
                 foreach (List<string> rule in Rules)
@@ -193,12 +194,15 @@ namespace tyap3
                                     flag = false;
                                     break;
                                 }
+
                             }
                         }
 
                     }
 
                 }
+                changes += " (" + CurrentStage + " " + Chain + " " + Stack + ") " + "\n";
+
                 if (flag)
                 {
                     return changes + " нет правила для " + " (" + CurrentStage + " " + Chain[0] + " " + Stack[0] + ") ";
@@ -209,6 +213,10 @@ namespace tyap3
                 {
                     break;
                 }
+            }
+            if (Chain.Length == 0 && Rules[Rules.Count - 1][1] == "_") 
+            {
+                CurrentStage = FinalStage;
             }
 
             Console.WriteLine(Chain.Length);
