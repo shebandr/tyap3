@@ -87,7 +87,7 @@ namespace tyap3
             {
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 Content = labelVar,
-                Height = 400
+                Height = 200
             };
             MainStackPanel.Children.Add(scrollViewer);
 
@@ -135,8 +135,8 @@ namespace tyap3
             Stack = "Z";
             string changes = "";
             changes += " (" + CurrentStage + " " + Chain + " " + Stack + ") " + "\n";
-
-            foreach (char i in Chain)
+            int chainLength = Chain.Length;
+            for (int i =0; i<chainLength+1; i++)
             {
                 bool flag = true;
 
@@ -214,10 +214,11 @@ namespace tyap3
                     break;
                 }
             }
-            if (Chain.Length == 0 && Rules[Rules.Count - 1][1] == "_") 
+            //костыльная проверка на конец
+/*            if (Chain.Length == 0 && Rules[Rules.Count - 1][1] == "_") 
             {
                 CurrentStage = FinalStage;
-            }
+            }*/
 
             Console.WriteLine(Chain.Length);
             if (Chain.Length != 0)
