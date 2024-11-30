@@ -133,10 +133,11 @@ namespace tyap3
             CurrentStage = StartStage;
             FinalStage = Rules[Rules.Count - 1][3];
             Stack = "Z";
+            Chain = Chain + "Z";
             string changes = "";
             changes += " (" + CurrentStage + " " + Chain + " " + Stack + ") " + "\n";
             int chainLength = Chain.Length;
-            for (int i =0; i<chainLength+1; i++)
+            for (int i =0; i<chainLength; i++)
             {
                 bool flag = true;
 
@@ -201,13 +202,14 @@ namespace tyap3
                     }
 
                 }
+                Chain = Chain.Remove(0, 1);
+
                 changes += " (" + CurrentStage + " " + Chain + " " + Stack + ") " + "\n";
 
                 if (flag)
                 {
                     return changes + " нет правила для " + " (" + CurrentStage + " " + Chain[0] + " " + Stack[0] + ") ";
                 }
-                Chain = Chain.Remove(0, 1);
                 Console.WriteLine(changes);
                 if (Chain.Length == 0)
                 {
@@ -219,7 +221,19 @@ namespace tyap3
             {
                 CurrentStage = FinalStage;
             }*/
-
+            foreach(var r in Rules)
+            {
+                if (r[4] == FinalStage)
+                {
+                    if (r[0] == CurrentStage && r[2] == Stack[0].ToString())
+                    {
+                        if(Chain.Length == 0 && r[1] == "Z")
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
             Console.WriteLine(Chain.Length);
             if (Chain.Length != 0)
             {
